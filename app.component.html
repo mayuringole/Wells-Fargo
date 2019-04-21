@@ -1,0 +1,44 @@
+<h1 style="text-align:center">Sample Form</h1>
+<form [formGroup]="parentForm" (ngSubmit)="submitForm()" style="text-align:center">
+  <div class="row">
+    <label class="col-md-3">Name</label>
+    <input formControlName="name" type="text" class="col-md-4">
+  </div>
+  <div class="row">
+    <app-address [parentForm]="parentForm"></app-address>
+  </div>
+  <div class="row">
+    <app-contact [parentForm]="parentForm"></app-contact>
+  </div>
+  <div class="row">
+    <label class="col-md-3" >Gender</label>
+    <select class="col-md-4" (click)="onSelect()" formControlName="gender">
+        <option  *ngFor="let opt of list">{{opt.value}}</option>
+    </select>
+  </div>
+  <div class="row">
+      <label class="col-md-3" >Salary</label>
+    <input formControlName="salary" type="text" class="col-md-4">
+  </div>
+  <div class="row">
+    <button type="submit" [disabled]="!parentForm.valid" [ngClass]="{'disable':!parentForm.valid}" style="text-align:left">Submit</button>
+  </div>
+</form>
+
+<div *ngIf="showValues">
+<div class="row">
+    <label class="col-md-3" >Name</label>{{parentForm.controls['name'].value}}
+  </div>
+  <div class="row">
+    <label class="col-md-3" >Address</label>{{parentForm.controls['addressGroup'].controls['address'].value}}
+  </div>
+  <div class="row">
+    <label class="col-md-3" >Contact</label>{{parentForm.controls['contactGroup'].controls['contact'].value}}
+  </div>
+  <div class="row">
+    <label class="col-md-3" >Gender</label>{{parentForm.controls['gender'].value}}
+  </div>
+  <div class="row">
+    <label class="col-md-3" >Salary</label>{{parentForm.controls['salary'].value}}
+  </div>
+</div>
